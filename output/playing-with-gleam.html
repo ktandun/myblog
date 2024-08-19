@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Kenzie Tandun" />
+  <title>Playing with Gleam</title>
+  <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Playing with Gleam</h1>
+<p class="author">Kenzie Tandun</p>
+</header>
+<p>Haskell was my first introduction to programming, this was taught in
+university and as a first year student I was really confused with the
+language. Many year after that I have worked on many different
+languages, mostly OOP like Java, python and C#. I really liked how
+simple python was, how easy to work with C# and Java was just meh. The
+thought of functional programming was always at the back of my head, but
+whenever I look at the syntax of it, it looks so scary, where are the
+brackets?? I tried F#, Elixir and Clojure. The last two I’m not a fan of
+just because it is not statically typed. I stumbled across Gleam when it
+released its version 1.0 but never thought about it until last week when
+I saw this video by <a
+href="https://www.youtube.com/watch?v=3lYHFctx2Ks&amp;t=557s&amp;pp=ygUQaGF5bGVpZ2ggcGhhbnRvbQ%3D%3D">Hayleigh
+Thompson</a>. This is when I got hooked to the language.</p>
+<p>Gleam is a really cool language, it is really readable and the syntax
+feels familiar when you are coming from OOP background. Comparing it to
+F# or Elixir, it does not feel like a “functional” “nerdy” language.
+Compare the syntax below:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode fsharp"><code class="sourceCode fsharp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>//<span class="co"> F#</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ot">open</span> System</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> from whom =</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    sprintf <span class="st">&quot;from %s&quot;</span> whom</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> main argv =</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> message = from <span class="st">&quot;F#&quot;</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    printfn <span class="st">&quot;Hello world %s&quot;</span> message</span></code></pre></div>
+<pre class="gleam"><code>// Gleam
+import gleam/io
+
+pub fn main() {
+    io.println(&quot;Hello, Joe!&quot;)
+}</code></pre>
+<p>Isn’t Gleam just way easier to read? The brackets after function
+names and curly braces to wrap the function body just feels comfy.</p>
+<p>Gleam does not have concept of exceptions, so we have to handle
+errors as they come. This is done by using <code>Result</code> types.
+Result types consists of two states, <code>Ok</code> and
+<code>Error</code>. It is handled like so:</p>
+<pre class="gleam"><code>let result = function_that_returns_result()
+
+case result {
+    Ok(res) -&gt; do_something()
+    Error(err) -&gt; handle_error()
+}</code></pre>
+<p>If we have multiple functions that returns Result type, the
+<code>gleam/result</code> lib has a helper <code>try</code> which can be
+used to chain them. In the example below, the functions will only
+proceed if the responses are <code>Ok</code> otherwise it will
+short-circuit immediately. This concept is also known as <a
+href="https://fsharpforfunandprofit.com/rop/">Railway Oriented
+Programming</a>.</p>
+<pre class="gleam"><code>use value1 &lt;- result.try(function_that_returns_result())
+use value2 &lt;- result.try(another_function_that_returns_result(value1))</code></pre>
+<p>I have been writing Gleam for a week or so now and it feels really
+nice. The tooling is quite mature relative to how young the language is
+and it integrates well with neovim. Definitely give it a go if you want
+to learn functional programming! <a href="https://gleam.run/">Gleam
+Website</a></p>
+<footer>
+	<p>This website uses Simple.css</p>
+	<p>Simple.css was created by <a href="https://kevquirk.com">Kev Quirk</a> and is licensed under the MIT license.<br></p>
+</footer>
+</body>
+</html>

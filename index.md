@@ -1,6 +1,6 @@
 ---
-title: "My Blog"
-author: "Kenzie Tandun"
+title: "How did you get here?"
+author: "blogposts by Kenzie Tandun"
 ---
 
 # Posts

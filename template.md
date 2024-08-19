@@ -1,7 +1,5 @@
 ---
 title: "Test"
-author: "Kenzie Tandun"
-date: "2024-08-19"
 ---
 
 # Introduction

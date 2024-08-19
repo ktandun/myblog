@@ -1,6 +1,5 @@
 ---
 title: "Playing with Gleam"
-author: "Kenzie Tandun"
 ---
 
 Haskell was my first introduction to programming, this was taught in university and as a first year student I was really confused with the language. Many year after that I have worked on many different languages, mostly OOP like Java, python and C#. I really liked how simple python was, how easy to work with C# and Java was just meh. The thought of functional programming was always at the back of my head, but whenever I look at the syntax of it, it looks so scary, where are the brackets?? I tried F#, Elixir and Clojure. The last two I'm not a fan of just because it is not statically typed. I stumbled across Gleam when it released its version 1.0 but never thought about it until last week when I saw this video by [Hayleigh Thompson](https://www.youtube.com/watch?v=3lYHFctx2Ks&t=557s&pp=ygUQaGF5bGVpZ2ggcGhhbnRvbQ%3D%3D). This is when I got hooked to the language.

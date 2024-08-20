@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Switch easily between source code and test in neovim</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/spcss@0.9.0">
+		<style>
+			kbd {
+				color: cyan;
+				border: 1px solid white;
+				border-radius: 5px;
+				border-bottom: 3px solid white;
+				padding: 0.1rem 0.4rem;
+			}
+		</style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Switch easily between source code and test in
+neovim</h1>
+</header>
+<nav role="nav">
+<a href="https://ktandun.github.io/myblog">Home</a>
+</nav>
+<main> <p>When you have a project structure like this</p>
+<pre><code>src/
+    helloworld/
+        hello.gleam
+test/
+    helloworld/
+        hello_test.gleam</code></pre>
+<p>This keymap below can help you switch between
+<code>hello.gleam</code> and <code>hello_test.gleam</code> easily. Your
+test file is just <kbd>leader+n</kbd> away!</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode lua"><code class="sourceCode lua"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- Switch between source and test file</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="va">vim</span><span class="op">.</span><span class="va">keymap</span><span class="op">.</span>set<span class="op">(</span><span class="st">&#39;n&#39;</span><span class="op">,</span> <span class="st">&#39;&lt;leader&gt;n&#39;</span><span class="op">,</span> <span class="kw">function</span><span class="op">()</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">local</span> <span class="va">file_path</span> <span class="op">=</span> <span class="va">vim</span><span class="op">.</span><span class="va">fn</span><span class="op">.</span>expand<span class="op">(</span><span class="st">&#39;%&#39;</span><span class="op">)</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">local</span> <span class="va">src_pattern</span> <span class="op">=</span> <span class="st">&quot;/src/&quot;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">local</span> <span class="va">test_pattern</span> <span class="op">=</span> <span class="st">&quot;/test/&quot;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="va">file_path</span><span class="op">:</span><span class="fu">match</span><span class="op">(</span><span class="va">src_pattern</span><span class="op">)</span> <span class="cf">then</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>        <span class="kw">local</span> <span class="va">test_path</span> <span class="op">=</span> <span class="va">file_path</span><span class="op">:</span><span class="fu">gsub</span><span class="op">(</span><span class="va">src_pattern</span><span class="op">,</span> <span class="st">&quot;/test/&quot;</span><span class="op">):</span><span class="fu">gsub</span><span class="op">(</span><span class="st">&quot;(%..*)$&quot;</span><span class="op">,</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>                                                                     <span class="st">&quot;_test%1&quot;</span><span class="op">)</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>        <span class="va">vim</span><span class="op">.</span>cmd<span class="op">(</span><span class="st">&quot;edit &quot;</span> <span class="op">..</span> <span class="va">test_path</span><span class="op">)</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elseif</span> <span class="va">file_path</span><span class="op">:</span><span class="fu">match</span><span class="op">(</span><span class="va">test_pattern</span><span class="op">)</span> <span class="cf">then</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>        <span class="kw">local</span> <span class="va">src_path</span> <span class="op">=</span> <span class="va">file_path</span><span class="op">:</span><span class="fu">gsub</span><span class="op">(</span><span class="va">test_pattern</span><span class="op">,</span> <span class="st">&quot;/src/&quot;</span><span class="op">):</span><span class="fu">gsub</span><span class="op">(</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>                             <span class="st">&quot;_test(%..*)$&quot;</span><span class="op">,</span> <span class="st">&quot;%1&quot;</span><span class="op">)</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>        <span class="va">vim</span><span class="op">.</span>cmd<span class="op">(</span><span class="st">&quot;edit &quot;</span> <span class="op">..</span> <span class="va">src_path</span><span class="op">)</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>        <span class="fu">print</span><span class="op">(</span><span class="st">&quot;Not a source or test file&quot;</span><span class="op">)</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span><span class="op">,</span> <span class="op">{</span><span class="va">noremap</span> <span class="op">=</span> <span class="kw">true</span><span class="op">,</span> <span class="va">silent</span> <span class="op">=</span> <span class="kw">true</span><span class="op">})</span></span></code></pre></div> </main>
+  <footer>
+    <hr>
+    <p> This site uses <a href="https://github.com/susam/spcss">spcss</a> </p>
+  </footer>
+</body>
+</html>

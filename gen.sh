@@ -9,6 +9,7 @@ for file in posts/*.md; do
 	# Define the new filename with the .html extension
 	new_file="${base_name}.html"
 
+	echo "Generating $new_file"
 	pandoc "$file" -o output/"$new_file" --template=template.html
 done
 

@@ -1,73 +1,37 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="$lang$" xml:lang="$lang$"$if(dir)$ dir="$dir$"$endif$>
-<head>
-  <meta charset="utf-8" />
-  <meta name="generator" content="pandoc" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-$for(author-meta)$
-  <meta name="author" content="$author-meta$" />
-$endfor$
-$if(date-meta)$
-  <meta name="dcterms.date" content="$date-meta$" />
-$endif$
-$if(keywords)$
-  <meta name="keywords" content="$for(keywords)$$keywords$$sep$, $endfor$" />
-$endif$
-$if(description-meta)$
-  <meta name="description" content="$description-meta$" />
-$endif$
-  <title>$if(title-prefix)$$title-prefix$ – $endif$$pagetitle$</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/spcss@0.9.0">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="generator" content="pandoc" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+		<title>$if(title-prefix)$$title-prefix$ – $endif$$pagetitle$</title>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/spcss@0.9.0">
 		<style>
-			kbd {
-				color: cyan;
-				border: 1px solid white;
-				border-radius: 5px;
-				border-bottom: 3px solid white;
-				padding: 0.1rem 0.4rem;
-			}
+		kbd {
+			color: cyan;
+			border: 1px solid white;
+			border-radius: 5px;
+			border-bottom: 3px solid white;
+			padding: 0.1rem 0.4rem;
+		}
 		</style>
-$for(header-includes)$
-  $header-includes$
-$endfor$
-$if(math)$
-  $math$
-$endif$
-</head>
-<body>
-$for(include-before)$
-$include-before$
-$endfor$
-$if(title)$
-<header id="title-block-header">
-<h1 class="title">$title$</h1>
-$if(subtitle)$
-<p class="subtitle">$subtitle$</p>
-$endif$
-$for(author)$
-<p class="author">$author$</p>
-$endfor$
-$if(date)$
-<p class="date">$date$</p>
-$endif$
-$if(abstract)$
-<div class="abstract">
-<div class="abstract-title">$abstract-title$</div>
-$abstract$
-</div>
-$endif$
-</header>
-$endif$
-<nav role="nav">
-<a href="https://ktandun.github.io/myblog">Home</a>
-</nav>
-<main> $body$ </main>
-$for(include-after)$
-$include-after$
-$endfor$
-  <footer>
-    <hr>
-    <p> This site uses <a href="https://github.com/susam/spcss">spcss</a> </p>
-  </footer>
-</body>
+	</head>
+	<body>
+		$if(title)$
+		<header id="title-block-header">
+			<h1 class="title">$title$</h1>
+			$for(author)$
+			<p class="author">$author$</p>
+			$endfor$
+		</header>
+		$endif$
+		<nav role="nav">
+			<a href="https://ktandun.github.io/myblog">Home</a>
+		</nav>
+		<main> $body$ </main>
+		<footer>
+			<hr>
+			<p> This site uses <a href="https://github.com/susam/spcss">spcss</a> </p>
+		</footer>
+	</body>
 </html>

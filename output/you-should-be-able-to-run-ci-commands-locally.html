@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="generator" content="pandoc" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+		<title>You should be able to run CI commands locally</title>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/spcss@0.9.0">
+		<style>
+		kbd {
+			color: cyan;
+			border: 1px solid white;
+			border-radius: 5px;
+			border-bottom: 3px solid white;
+			padding: 0.1rem 0.4rem;
+		}
+		</style>
+	</head>
+	<body>
+				<header id="title-block-header">
+			<h1 class="title">You should be able to run CI commands locally</h1>
+					</header>
+				<nav role="nav">
+			<a href="https://ktandun.github.io/myblog">Home</a>
+		</nav>
+		<main> <p>I have worked for some years as a software developer and I
+noticed a reccuring pattern. The commands in the CI pipeline is not easy
+or intuitive to run locally. This makes it harder to check whether
+things will succeed in pipeline, even more annoying when the pipeline
+sometimes takes upwards of 10+ minutes or even an hour to complete. With
+all the available tools we have nowadays, pipeline commands should be
+contained in a script or even better a <a
+href="https://github.com/casey/just">justfile</a>.</p>
+<p>Compare the small example below:</p>
+<pre><code># without justfile
+
+jobs:
+  test:
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v4
+
+      - run: dbmate drop &amp;&amp; dbmate up
+        working-directory: ./backend
+
+      - run: gleam deps download
+        working-directory: ./backend
+
+      - run: gleam build
+        working-directory: ./backend
+
+      - run: gleam test
+        working-directory: ./backend</code></pre>
+<pre><code># all the logic is wrapped inside justfile
+
+jobs:
+  test:
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v4
+
+      - run: just test-ci</code></pre>
+<p>When something goes wrong and you need to debug it locally, it is
+waaay easier to just run <code>just test-ci</code> instead of copy and
+pasting commands from your yml file.</p>
+<p>/rant</p> </main>
+		<footer>
+			<hr>
+			<p> This site uses <a href="https://github.com/susam/spcss">spcss</a> </p>
+		</footer>
+	</body>
+</html>

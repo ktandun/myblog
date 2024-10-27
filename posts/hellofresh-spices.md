@@ -12,6 +12,8 @@ title: "Hellofresh spices"
 | Onion Powder          | 1 tsp    |
 | Paprika               | 2 tsp    |
 
+&nbsp;
+
 | Southwest Spice Blend | Quantity |
 |-----------------------|----------|
 | Garlic Powder         | 4 tsp    |

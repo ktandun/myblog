@@ -17,4 +17,3 @@ title: "Hellofresh spices"
 | Garlic Powder         | 4 tsp    |
 | Cumin                 | 2 tsp    |
 | Chili Powder          | 2 tsp    |
-```​⬤
